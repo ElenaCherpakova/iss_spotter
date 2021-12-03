@@ -1,18 +1,14 @@
-// const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss_promised');
 const { nextISSTimesForMyLocation } = require('./iss_promised');
 
-// fetchMyIP()
-// .then(fetchCoordsByIP)
-// .then(fetchISSFlyOverTimes)
-// .then(body => console.log(body));  //1st step. Should be removed after implementing 2nd step
+const printPassTimes = function(passTimes) {
+  for (const pass of passTimes) {
+    const datetime = new Date(0);
+    datetime.setUTCSeconds(pass.risetime);
+    const duration = pass.duration;
+    console.log(`Next pass at ${datetime} for ${duration} seconds!`);
+  }
+};
 
-
-// see index.js for printPassTimes
-// copy it from there, or better yet, moduralize and require it in both files
-
-// Call
-
-//2nd step
 nextISSTimesForMyLocation()
   .then((passTimes) => {
     printPassTimes(passTimes);
